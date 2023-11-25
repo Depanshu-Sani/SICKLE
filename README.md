@@ -38,7 +38,7 @@ SICKLE dataset, a unique collection of multi-resolution time-series imagery from
 ### Dataset Comparison
 ![](img/2.png)
 
-A comparison of SICKLE with related datasets (SUSTAINBENCH, Radiant ML Hub, Agriculture-Vision, Pixel Set, PASTIS-R and Crop Harvest) based on the tasks that can be performed using them. The bottom 4 tasks are not only related to the agricultural domain but are also applicable for remote sensing community.
+A comparison of SICKLE with related datasets (SUSTAINBENCH [31], Radiant ML Hub [5], Agriculture-Vision [2], PixelSet [21], PASTIS-R [20] and Crop Harvest [26])) based on the tasks that can be performed using them. The bottom 4 tasks are not only related to the agricultural domain but are also applicable for remote sensing community.
 
 ## Benchmark 
 ![](img/4.png)
