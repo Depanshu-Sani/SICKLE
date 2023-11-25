@@ -1,9 +1,6 @@
 # SICKLE: A Multi-Sensor Satellite Imagery Dataset Annotated with Multiple Key Cropping Parameters (WACV 2024)
 
-![An illustration of the outputs obtained from U-Net 3D (Fusion) on the test set. Figures (a) - (e) are the ground truth annotations
-and figures (f) - (j) are the output maps generated. All the pixels that were predicted as non-paddy in (f) were masked out in (g) - (j).](img/1.png)
-An illustration of the outputs obtained from U-Net 3D (Fusion) on the test set. Figures (a) - (e) are the ground truth annotations
-and figures (f) - (j) are the output maps generated. All the pixels that were predicted as non-paddy in (f) were masked out in (g) - (j).
+![](img/1.png)
 
 This repository is the official implementation of [SICKLE: A Multi-Sensor Satellite Imagery Dataset Annotated with Multiple Key Cropping Parameters
 ](/). Building upon the implementation provided [here](https://github.com/VSainteuf/utae-paps)
