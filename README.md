@@ -52,7 +52,7 @@ material includes a list of exhaustive experiments and their results
 
 ### Reference
 
-Please include a citation to the following papers if you use this implemetation or dataset provided U-TAE, PaPs or the PASTIS benchmark.
+Please include a citation to the following papers if you use this implemetation or dataset provided.
 
 ```
 TODO
