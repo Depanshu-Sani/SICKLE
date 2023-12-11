@@ -42,17 +42,81 @@ A comparison of SICKLE with related datasets (SUSTAINBENCH [31], Radiant ML Hub 
 
 Results for the benchmarking tasks. Single-image experiments are denoted with SI in parenthesis. The results are reported using
 the same benchmarking model (U-Net 3D for time-series and U-Net 2D for single image) for a fair comparison. RS denotes the experiment
-when using Regional Standards to create the time-series input, whereas AS denotes the one using Actual Season. The supplementary
-material includes a list of exhaustive experiments and their results
+when using Regional Standards to create the time-series input, whereas AS denotes the one using Actual Season. 
+
+
+## SICKLE Dataset download
+The Dataset is available for download [here](\). 
+
+
+## Library requirements
+To install requirements:
+```setup
+pip install -r requirements.txt
+```
+
+
+## Inference with pre-trained models
+Pre-trained weights are available [here](\)
+
+After downloading the pre-trained weights, extract them inside this git repository. Once you have the weights use below commands for reproducing results. 
+
+| **Model**      | **Satellite**                         | **Command**                             |
+|----------------|-----------------------------------------|-----------------------------------------|
+| **3D U-Net**   | S1     | `./test.sh <path_to_data> [S1] unet3d`   |
+|                | S2     | `./test.sh <path_to_data> [S2] unet3d`   |
+|                | L8     | `./test.sh <path_to_data> [L8] unet3d`   |
+|                |Fusion  | `./test.sh <path_to_data> [S1,S2,L8] unet3d` |
+| **UTAE**   | S1     | `./test.sh <path_to_data> [S1] utae`   |
+|                | S2     | `./test.sh <path_to_data> [S2] utae`   |
+|                | L8     | `./test.sh <path_to_data> [L8] utae`   |
+|                |Fusion  | `./test.sh <path_to_data> [S1,S2,L8] utae` |
+| **ConvLSTM**   | S1     | `./test.sh <path_to_data> [S1] convlstm`   |
+|                | S2     | `./test.sh <path_to_data> [S2] convlstm`   |
+|                | L8     | `./test.sh <path_to_data> [L8] convlstm`   |
+|                |Fusion  | `./test.sh <path_to_data> [S1,S2,L8] convlstm` |
+
+
+
+
+## Training models from scratch
+
+| **Model**      | **Satellite**                         | **Command**                             |
+|----------------|-----------------------------------------|-----------------------------------------|
+| **3D U-Net**   | S1     | `./train.sh <path_to_data> [S1] unet3d`   |
+|                | S2     | `./train.sh <path_to_data> [S2] unet3d`   |
+|                | L8     | `./train.sh <path_to_data> [L8] unet3d`   |
+|                |Fusion  | `./train.sh <path_to_data> [S1,S2,L8] unet3d` |
+| **UTAE**   | S1     | `./train.sh <path_to_data> [S1] utae`   |
+|                | S2     | `./train.sh <path_to_data> [S2] utae`   |
+|                | L8     | `./train.sh <path_to_data> [L8] utae`   |
+|                |Fusion  | `./train.sh <path_to_data> [S1,S2,L8] utae` |
+| **ConvLSTM**   | S1     | `./train.sh <path_to_data> [S1] convlstm`   |
+|                | S2     | `./train.sh <path_to_data> [S2] convlstm`   |
+|                | L8     | `./train.sh <path_to_data> [L8] convlstm`   |
+|                |Fusion  | `./train.sh <path_to_data> [S1,S2,L8] convlstm` |
 
 
 
 ### Reference
 
 Please include a citation to the following papers if you use this implemetation or dataset provided.
+```
+@article{sani2023sickle,
+  title={SICKLE: A Multi-Sensor Satellite Imagery Dataset Annotated with Multiple Key Cropping Parameters},
+  author={Sani, Depanshu and Mahato, Sandeep and Saini, Sourabh and Agarwal, Harsh Kumar and Devshali, Charu Chandra and Anand, Saket and Arora, Gaurav and Jayaraman, Thiagarajan},
+  journal={arXiv preprint arXiv:2312.00069},
+  year={2023}
+}
+```
 
 ```
-TODO
+@article{garnot2021panoptic,
+  title={Panoptic Segmentation of Satellite Image Time Series with Convolutional Temporal Attention Networks},
+  author={Sainte Fare Garnot, Vivien  and Landrieu, Loic },
+  journal={ICCV},
+  year={2021}
+}
 ```
 
 ### Credits
