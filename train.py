@@ -1,6 +1,9 @@
+#  conda install pytorch torchvision torchaudio pytorch-cuda=11.6 \
+    
+# -c pytorch -c nvidia -c conda-forge
 """
 Main script for semantic experiments
-Author: Vivien Sainte Fare Garnot (github/VSainteuf)
+Built upon Vivien Sainte Fare Garnot (github/VSainteuf)
 License: MIT
 """
 
@@ -10,7 +13,6 @@ import os
 import copy
 import wandb
 import pprint
-import imgaug
 
 import time
 import random
@@ -121,7 +123,6 @@ def checkpoint(log, config):
 def set_seed(seed=42):
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(seed)
-    imgaug.random.seed(seed)
 
     # For reproducibility
     np.random.seed(seed)

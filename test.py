@@ -1,6 +1,7 @@
+# 
 """
 Main script for semantic experiments
-Author: Vivien Sainte Fare Garnot (github/VSainteuf)
+Built upon Vivien Sainte Fare Garnot (github/VSainteuf)
 License: MIT
 """
 
@@ -13,7 +14,6 @@ import matplotlib.pyplot as plt
 
 import wandb
 import pprint
-import imgaug
 
 import time
 import random
@@ -125,7 +125,6 @@ def checkpoint(log, config):
 def set_seed(seed=42):
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(seed)
-    imgaug.random.seed(seed)
 
     # For reproducibility
     np.random.seed(seed)
@@ -237,11 +236,11 @@ def iterate(
                     l8_images.cpu().numpy(), s2_images.cpu().numpy(), s1_images.cpu().numpy(), \
                     l8_dates.cpu().numpy(), s2_dates.cpu().numpy(), s1_dates.cpu().numpy(), \
                     y_pred.cpu().numpy(), masks.cpu().numpy()
-
+            _task = task
             if CFG.actual_season:
-                task = task + "_season"
+                _task = task + "_season"
             log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, masks, y_pred,
-                                 wandb_table, CFG.seed, batch_id=i, task=task)
+                                 wandb_table, CFG.seed, batch_id=i, task=_task)
 
         loss_meter.add(loss.item())
 
