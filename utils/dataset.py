@@ -101,7 +101,7 @@ class UNET3d_Dataset(Dataset):
         return zero_pixels / all_pixels
 
     def _read_masks(self, uid):
-        path = f"{self.data_dir}/masks/yield_distributed/{self.mask_res}m/{uid}.tif"
+        path = f"{self.data_dir}/masks/{self.mask_res}m/{uid}.tif"
         with rasterio.open(path, 'r') as fp:
             mask = fp.read()
         # only make crop mask binary and change ignore_index
@@ -127,7 +127,7 @@ class UNET3d_Dataset(Dataset):
         size = self.img_size
 
         # get all files associated this UID
-        path = f"{self.data_dir}/{self.satellite}/npy/{uid}/*.npz"
+        path = f"{self.data_dir}/images/{self.satellite}/npy/{uid}/*.npz"
         files = glob.glob(path)
 
         mask = self._read_masks(uid).transpose(1, 2, 0)
@@ -251,10 +251,11 @@ class SICKLE_Dataset(UNET3d_Dataset):
     def _read_sample(self, uid):
         #  get metadata
         season, year = self.df[self.df.UNIQUE_ID == int(uid)].iloc[0][["STANDARD_SEASON", "YEAR"]].values
+        print(uid,season,year, self.df[self.df.UNIQUE_ID == int(uid)]  )
         start_date = date(int(year), mon_to_int[season.split("-")[0]], 1)
 
         # get all files associated this UID
-        path = f"{self.data_dir}/{self.satellite}/npy/{uid}/*.npz"
+        path = f"{self.data_dir}/images/{self.satellite}/npy/{uid}/*.npz"
         files = glob.glob(path)
 
         # define empty sample and dates

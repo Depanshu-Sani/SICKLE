@@ -1,0 +1,6 @@
+runs/
+test_results/
+wandb/
+models/__pycache__/*
+utils/__pycache__/*
+*.zip

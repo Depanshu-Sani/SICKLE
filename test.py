@@ -362,7 +362,7 @@ def main(CFG):
 
     # Dataset definition
     data_dir = CFG.data_dir
-    df = pd.read_csv(f"{data_dir}/CSVs/clean_cauvery_dataset_with_split.csv")
+    df = pd.read_csv(os.path.join(data_dir, "sickle_dataset_tabular.csv"))
     # if "S2" in CFG.satellites.keys():
     #     df = df[df[f"S2_available"] == True].reset_index(drop=True)
     # else:
