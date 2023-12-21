@@ -155,7 +155,7 @@ def log_wandb(loss, metrics, phase="train"):
                 f"{phase}_iou_paddy": iou_paddy,
                 f"{phase}_iou_non_paddy": iou_non_paddy,
             })
-        if phase == "test":
+        if phase == "val":
             wandb.log({f"{phase}_conf_mat": wandb.plot.confusion_matrix(y_true=y_true, preds=y_pred, probs=None,
                                                                         class_names=["Paddy", "Non Paddy"])})
 
@@ -239,7 +239,7 @@ def iterate(
             _task = task
             if CFG.actual_season:
                 _task = task + "_season"
-            log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, masks, y_pred,
+            log_val_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, masks, y_pred,
                                  wandb_table, CFG.seed, batch_id=i, task=_task)
 
         loss_meter.add(loss.item())
@@ -279,8 +279,8 @@ def generate_heatmap(mask):
     return mask
 
 
-def log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, gt_masks, pred_masks,
-                         test_table, seed, batch_id=None, task="crop_type"):
+def log_val_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, gt_masks, pred_masks,
+                         val_table, seed, batch_id=None, task="crop_type"):
     _id = 0
     # print(gt_masks.shape,pred_masks.shape)
     # pred_masks[pred_masks == 1] = 128
@@ -306,9 +306,9 @@ def log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1
         #             CFG.satellites["S1" if len(CFG.satellites) == 3 else CFG.primary_sat]["rgb_bands"]].transpose(1, 2,
         #                                                                                                           0)
         #         s1_image = ((s1_image - np.min(s1_image)) / (np.max(s1_image) - np.min(s1_image)))
-        #         plt.imsave(f"test_results/seed2/{task}/{batch_id}_{i}_{x}_L8.png", l8_image)
-        #         plt.imsave(f"test_results/seed2/{task}/{batch_id}_{i}_{x}_S2.png", s2_image)
-        #         plt.imsave(f"test_results/seed2/{task}/{batch_id}_{i}_{x}_S1.png", s1_image)
+        #         plt.imsave(f"val_results/seed2/{task}/{batch_id}_{i}_{x}_L8.png", l8_image)
+        #         plt.imsave(f"val_results/seed2/{task}/{batch_id}_{i}_{x}_S2.png", s2_image)
+        #         plt.imsave(f"val_results/seed2/{task}/{batch_id}_{i}_{x}_S1.png", s1_image)
 
         # get last available image
         l8_image = l8_sample[len(l8_sample_dates[l8_sample_dates != 0]) - 1]
@@ -327,11 +327,11 @@ def log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1
         s1_image = ((s1_image - np.min(s1_image)) / (np.max(s1_image) - np.min(s1_image)))
 
         # log whole prediction mask
-        os.makedirs(f"test_results/seed{seed}/test/{task}", exist_ok=True)
+        os.makedirs(f"val_results/seed{seed}/val/{task}", exist_ok=True)
         if task == "crop_type":
-            np.save(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}.npy", pred_mask)
+            np.save(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}.npy", pred_mask)
         else:
-            crop_type_mask = np.load(f"test_results/seed{seed}/test/crop_type/{batch_id}_{i}.npy")
+            crop_type_mask = np.load(f"val_results/seed{seed}/val/crop_type/{batch_id}_{i}.npy")
             pred_mask[crop_type_mask <= 0.5] = -1
         pred_mask_whole = generate_heatmap(copy.deepcopy(pred_mask))
         pred_mask[gt_mask == -1] = -1
@@ -341,15 +341,15 @@ def log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1
             gt_mask[gt_mask == 1] = 0
             gt_mask[gt_mask == 2] = 1
         gt_mask = generate_heatmap(copy.deepcopy(gt_mask))
-        plt.imsave(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}_L8.png", l8_image)
-        plt.imsave(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}_S2.png", s2_image)
-        plt.imsave(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}_S1.png", s1_image)
-        plt.imsave(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}_ground_truth.png", gt_mask)
-        plt.imsave(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}_pred_mask_whole.png", pred_mask_whole)
-        plt.imsave(f"test_results/seed{seed}/test/{task}/{batch_id}_{i}_pred_mask.png", pred_mask)
+        plt.imsave(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}_L8.png", l8_image)
+        plt.imsave(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}_S2.png", s2_image)
+        plt.imsave(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}_S1.png", s1_image)
+        plt.imsave(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}_ground_truth.png", gt_mask)
+        plt.imsave(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}_pred_mask_whole.png", pred_mask_whole)
+        plt.imsave(f"val_results/seed{seed}/val/{task}/{batch_id}_{i}_pred_mask.png", pred_mask)
         i += 1
 
-        test_table.add_data(wandb.Image(l8_image), wandb.Image(s2_image), wandb.Image(s1_image), wandb.Image(gt_mask),
+        val_table.add_data(wandb.Image(l8_image), wandb.Image(s2_image), wandb.Image(s1_image), wandb.Image(gt_mask),
                             wandb.Image(pred_mask), wandb.Image(pred_mask_whole))
         _id += 1
         if _id == n_log:
@@ -370,7 +370,7 @@ def main(CFG):
     if CFG.task != "crop_type":
         df = df[df.YIELD > 0].reset_index(drop=True)
 
-    test_df = df[df.SPLIT == "test"].reset_index(drop=True)
+    val_df = df[df.SPLIT == "val"].reset_index(drop=True)
 
     dt_args = dict(
         data_dir=data_dir,
@@ -379,17 +379,17 @@ def main(CFG):
         # transform=CFG.use_augmentation,
         actual_season=CFG.actual_season
     )
-    dt_test = SICKLE_Dataset(df=test_df, **dt_args)
+    dt_val = SICKLE_Dataset(df=val_df, **dt_args)
 
     collate_fn = lambda x: utae_utils.pad_collate(x, pad_value=CFG.pad_value)
-    test_loader = data.DataLoader(
-        dt_test,
+    val_loader = data.DataLoader(
+        dt_val,
         batch_size=CFG.batch_size,
         shuffle=False,
         collate_fn=collate_fn,
         num_workers=CFG.num_workers,
     )
-    batch_data, masks = next(iter(test_loader))
+    batch_data, masks = next(iter(val_loader))
     for sat in CFG.satellites.keys():
         (samples, dates) = batch_data[sat]
 
@@ -416,39 +416,39 @@ def main(CFG):
     )
     model.load_state_dict(best_checkpoint["model"])
     model.eval()
-    test_loss, test_metrics, _ = iterate(
+    val_loss, val_metrics, _ = iterate(
         model,
-        data_loader=test_loader,
+        data_loader=val_loader,
         criterion=criterion,
         optimizer=optimizer,
-        mode="test",
+        mode="val",
         device=device,
         task=CFG.task,
         log=True
     )
-    print(f"Test Result {CFG.task}")
+    print(f"val Result {CFG.task}")
     if CFG.task == "crop_type":
-        # test metric
-        test_f1_macro, test_acc, test_iou, test_f1_paddy, test_f1_non_paddy, \
-        test_acc_paddy, test_acc_non_paddy, test_iou_paddy, test_iou_non_paddy, _ = test_metrics
-        deciding_metric = test_f1_macro
+        # val metric
+        val_f1_macro, val_acc, val_iou, val_f1_paddy, val_f1_non_paddy, \
+        val_acc_paddy, val_acc_non_paddy, val_iou_paddy, val_iou_non_paddy, _ = val_metrics
+        deciding_metric = val_f1_macro
         # log and print metrics
         print(
-            f"F1: {test_f1_macro:0.4f} | Paddy F1: {test_f1_paddy:0.4f} | Non-Paddy F1: {test_f1_non_paddy:0.4f} \nAcc:{test_acc:0.4f} | Paddy Acc: {test_acc_paddy:0.4f} | Non-Paddy Acc: {test_acc_non_paddy:0.4f}\niou:{test_iou:0.4f} | Paddy iou: {test_iou_paddy:0.4f} | Non-Paddy iou: {test_iou_non_paddy:0.4f}")
-        log_wandb(test_loss, test_metrics, phase="test")
+            f"F1: {val_f1_macro:0.4f} | Paddy F1: {val_f1_paddy:0.4f} | Non-Paddy F1: {val_f1_non_paddy:0.4f} \nAcc:{val_acc:0.4f} | Paddy Acc: {val_acc_paddy:0.4f} | Non-Paddy Acc: {val_acc_non_paddy:0.4f}\niou:{val_iou:0.4f} | Paddy iou: {val_iou_paddy:0.4f} | Non-Paddy iou: {val_iou_non_paddy:0.4f}")
+        log_wandb(val_loss, val_metrics, phase="val")
 
     else:
-        # test metrics
-        test_rmse, test_mae, test_mape = test_metrics
-        print(f"Test RMSE: {test_rmse:0.4f} | Test MAE: {test_mae:0.4f} | Test MAPE: {test_mape:0.4f}")
-        testlog = {
-            "test_loss": test_loss,
-            "test_rmse": test_rmse.item(),
-            "test_mae": test_mae.item(),
-            "test_mape": test_mape.item(),
+        # val metrics
+        val_rmse, val_mae, val_mape = val_metrics
+        print(f"val RMSE: {val_rmse:0.4f} | val MAE: {val_mae:0.4f} | val MAPE: {val_mape:0.4f}")
+        vallog = {
+            "val_loss": val_loss,
+            "val_rmse": val_rmse.item(),
+            "val_mae": val_mae.item(),
+            "val_mape": val_mape.item(),
         }
         if CFG.wandb:
-            wandb.log(testlog)
+            wandb.log(vallog)
     # log model to wandb
     # if CFG.wandb:
     #     best = wandb.Artifact('checkpoint_best', type='model')
@@ -489,7 +489,7 @@ if __name__ == "__main__":
     # else:
     #     assert CFG.num_classes == CFG.out_conv[-1]
 
-    CFG.run_path = f"runs/wacv_sickle_test/{CFG.exp_name}/{CFG.run_name}"
+    CFG.run_path = f"runs/wacv_sickle_val/{CFG.exp_name}/{CFG.run_name}"
     satellite_metadata = {
         "S2": {
             "bands": ['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B8A', 'B9', 'B11', 'B12'],
@@ -522,7 +522,7 @@ if __name__ == "__main__":
     if CFG.wandb:
         wandb.login()
         run = wandb.init(
-            project="temp_sickle_wacv_test",
+            project="temp_sickle_wacv_val",
             entity="agrifieldnet",
             config={k: v for k, v in dict(vars(CFG)).items() if "__" not in k},
             name=CFG.run_name,

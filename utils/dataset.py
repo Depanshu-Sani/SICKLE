@@ -251,7 +251,6 @@ class SICKLE_Dataset(UNET3d_Dataset):
     def _read_sample(self, uid):
         #  get metadata
         season, year = self.df[self.df.UNIQUE_ID == int(uid)].iloc[0][["STANDARD_SEASON", "YEAR"]].values
-        print(uid,season,year, self.df[self.df.UNIQUE_ID == int(uid)]  )
         start_date = date(int(year), mon_to_int[season.split("-")[0]], 1)
 
         # get all files associated this UID

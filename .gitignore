@@ -1,5 +1,6 @@
 runs/
 test_results/
+val_results/
 wandb/
 models/__pycache__/*
 utils/__pycache__/*
