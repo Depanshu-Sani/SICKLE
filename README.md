@@ -48,9 +48,7 @@ A comparison of SICKLE with the related datasets (SUSTAINBENCH [31], Radiant ML 
 ## Benchmarked Results
 <img src="img/4.png" width=70% />
 
-Results for the benchmarking tasks. Single-image experiments are denoted with SI in parenthesis. The results are reported using
-the same benchmarking model (U-Net 3D for time-series and U-Net 2D for single image) for a fair comparison. RS denotes the experiment
-when using Regional Standards to create the time-series input, whereas AS denotes the one using Actual Season. 
+Results for the benchmarking tasks. Single-image experiments are denoted with SI in parenthesis. The results are reported using the same benchmarking model (U-Net 3D for time-series and U-Net 2D for single image) for a fair comparison. RS denotes the experiment when using Regional Standards to create the time-series input, whereas AS denotes the one using Actual Season. **_The results presented in the paper are on the test set. We are withholding the test set for now but have shared the evaluation scripts used for the test set so that the evaluation can be performed on the validation set._**
 
 
 ## SICKLE Dataset download
