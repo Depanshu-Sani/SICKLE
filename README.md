@@ -10,7 +10,8 @@ This is the official implementation of **_[SICKLE: A Multi-Sensor Satellite Imag
 **[Website](https://sites.google.com/iiitd.ac.in/sickle/) | 
 [Paper](https://openaccess.thecvf.com/content/WACV2024/html/Sani_SICKLE_A_Multi-Sensor_Satellite_Imagery_Dataset_Annotated_With_Multiple_Key_WACV_2024_paper.html) | 
 [Poster](https://drive.google.com/file/d/1kG_77d3R3upy1b4Ia8B_gOLvtAsCAk30/view) | 
-[Video](https://www.youtube.com/watch?v=2p4BDVLrmdw)**
+[Video](https://www.youtube.com/watch?v=2p4BDVLrmdw) |
+[Dataset](https://docs.google.com/forms/d/e/1FAIpQLSdq7Dcj5FF1VmlKozrQ7XNoq006iVKrUIMTK2jReBJDuO1N2g/viewform)**
 
 **_SICKLE_** is a unique collection of multi-resolution time-series images from Landsat-8, Sentinel-1, and Sentinel-2 satellites. The dataset covers the period from January 2018 to March 2021 and includes optical, thermal, and microwave sensor data. It is focused on paddy cultivation in the Cauvery Delta region of Tamil Nadu, India, where each temporal sequence is prepared based on the cropping practices adopted by the farmers in that region. Annotations for multiple key cropping parameters are provided at 3m, 10m, and 30m resolutions, enabling diverse analyses.
 
