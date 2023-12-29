@@ -3,7 +3,7 @@ This is the official implementation of **_[SICKLE: A Multi-Sensor Satellite Imag
 
 [Depanshu Sani](https://sites.google.com/iiitd.ac.in/depanshu-sani/), [Sandeep Mahato](https://in.linkedin.com/in/sandeep-mahato-66569233), [Sourabh Saini](https://in.linkedin.com/in/sourabh7211), [Harsh Kumar Agarwal](https://www.linkedin.com/in/harsh-kumar-agarwal-b8bb92187), [Charu Chandra Devshali](https://www.linkedin.com/in/charu-chandra-devshali-18779a188/), [Saket Anand](https://faculty.iiitd.ac.in/~anands/), [Gaurav Arora](https://gauravaroraecon.wordpress.com/), [Thiagarajan Jayaraman](https://in.linkedin.com/in/thiagarajan-jayaraman-32407810); _In Proceedings of IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) 2024._
 
-** _[This repository is managed by [Sourabh Saini](https://in.linkedin.com/in/sourabh7211). For any code-related queries, please email us at sourabh19113@iiitd.ac.in. For any other queries, please email us at depanshus@iiitd.ac.in]_ **
+** _This repository is managed by [Sourabh Saini](https://in.linkedin.com/in/sourabh7211). For any code-related queries or issues, we encourage you to open a GitHub issue. You can also reach out to us via email at sourabh19113@iiitd.ac.in for additional assistance._ **
 
 ## 
 
@@ -66,10 +66,10 @@ pip install -r requirements.txt
 
 ## Inference with pre-trained models
 
-```diff
-- Where to save these weights? Specify
-```
-Copy the pre-trained weights at `@location`. Once you have the weights, use below commands for reproducing results. 
+After filling out the form provided above, you will gain access to the `weights.zip` file. Unzip this file inside `sickle` directory. Once uncompressed, you should have a `runs` folder, resembling the directory structure as below:
+
+<img src="img/dir_structure.png" width=30% />
+Once you have the weights, use below commands for reproducing results. 
 
 | **Model**      | **Satellite**                         | **Command**                             |
 |----------------|-----------------------------------------|-----------------------------------------|
