@@ -72,18 +72,18 @@ Copy the pre-trained weights at `@location`. Once you have the weights, use belo
 
 | **Model**      | **Satellite**                         | **Command**                             |
 |----------------|-----------------------------------------|-----------------------------------------|
-| **3D U-Net**   | S1     | `./test.sh <path_to_data> [S1] unet3d`   |
-|                | S2     | `./test.sh <path_to_data> [S2] unet3d`   |
-|                | L8     | `./test.sh <path_to_data> [L8] unet3d`   |
-|                |Fusion  | `./test.sh <path_to_data> [S1,S2,L8] unet3d` |
-| **UTAE**   | S1     | `./test.sh <path_to_data> [S1] utae`   |
-|                | S2     | `./test.sh <path_to_data> [S2] utae`   |
-|                | L8     | `./test.sh <path_to_data> [L8] utae`   |
-|                |Fusion  | `./test.sh <path_to_data> [S1,S2,L8] utae` |
-| **ConvLSTM**   | S1     | `./test.sh <path_to_data> [S1] convlstm`   |
-|                | S2     | `./test.sh <path_to_data> [S2] convlstm`   |
-|                | L8     | `./test.sh <path_to_data> [L8] convlstm`   |
-|                |Fusion  | `./test.sh <path_to_data> [S1,S2,L8] convlstm` |
+| **3D U-Net**   | S1     | `./evaluate.sh <path_to_data> [S1] unet3d`   |
+|                | S2     | `./evaluate.sh <path_to_data> [S2] unet3d`   |
+|                | L8     | `./evaluate.sh <path_to_data> [L8] unet3d`   |
+|                |Fusion  | `./evaluate.sh <path_to_data> [S1,S2,L8] unet3d` |
+| **UTAE**   | S1     | `./evaluate.sh <path_to_data> [S1] utae`   |
+|                | S2     | `./evaluate.sh <path_to_data> [S2] utae`   |
+|                | L8     | `./evaluate.sh <path_to_data> [L8] utae`   |
+|                |Fusion  | `./evaluate.sh <path_to_data> [S1,S2,L8] utae` |
+| **ConvLSTM**   | S1     | `./evaluate.sh <path_to_data> [S1] convlstm`   |
+|                | S2     | `./evaluate.sh <path_to_data> [S2] convlstm`   |
+|                | L8     | `./evaluate.sh <path_to_data> [L8] convlstm`   |
+|                |Fusion  | `./evaluate.sh <path_to_data> [S1,S2,L8] convlstm` |
 
 
 
