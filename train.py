@@ -165,7 +165,7 @@ def log_wandb(loss, metrics, table=None, phase="train"):
 
 def iterate(
         model, data_loader, criterion, optimizer=None, scheduler=None, mode="train", epoch=1, task="crop_type",
-        device=None, log=False
+        device=None, log=False, CFG=None,
 ):
     loss_meter = tnt.meter.AverageValueMeter()
     predictions = None
@@ -240,7 +240,7 @@ def iterate(
                     l8_images.cpu().numpy(), s2_images.cpu().numpy(), s1_images.cpu().numpy(), \
                     l8_dates.cpu().numpy(), s2_dates.cpu().numpy(), s1_dates.cpu().numpy(), \
                     y_pred.cpu().numpy(), masks.cpu().numpy()
-            log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, masks, y_pred, wandb_table)
+            log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, masks, y_pred, wandb_table, CFG=CFG)
 
         loss_meter.add(loss.item())
 
@@ -278,7 +278,7 @@ def generate_heatmap(mask):
     return mask
 
 
-def log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, gt_masks, pred_masks, test_table, task="crop_type"):
+def log_test_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, gt_masks, pred_masks, test_table, CFG = None, task="crop_type", ):
     _id = 0
     # print(gt_masks.shape,pred_masks.shape)
     # pred_masks[pred_masks == 1] = 128
@@ -435,6 +435,7 @@ def main(CFG):
             device=device,
             epoch=epoch,
             task=CFG.task,
+            CFG=CFG,
         )
 
         print("Validation . . . ")
@@ -447,6 +448,7 @@ def main(CFG):
             mode="val",
             device=device,
             task=CFG.task,
+            CFG=CFG,
         )
         lr = optimizer.param_groups[0]['lr']
         if CFG.task == "crop_type":

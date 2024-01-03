@@ -162,7 +162,7 @@ def log_wandb(loss, metrics, phase="train"):
 
 def iterate(
         model, data_loader, criterion, optimizer=None, scheduler=None, mode="train", epoch=1, task="crop_type",
-        device=None, log=False
+        device=None, log=False, CFG=None,
 ):
     loss_meter = tnt.meter.AverageValueMeter()
     predictions = None
@@ -240,7 +240,7 @@ def iterate(
             if CFG.actual_season:
                 _task = task + "_season"
             log_val_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, masks, y_pred,
-                                 wandb_table, CFG.seed, batch_id=i, task=_task)
+                                 wandb_table, CFG.seed, batch_id=i, task=_task,CFG=CFG)
 
         loss_meter.add(loss.item())
 
@@ -280,7 +280,7 @@ def generate_heatmap(mask):
 
 
 def log_val_predictions(l8_images, s2_images, s1_images, l8_dates, s2_dates, s1_dates, gt_masks, pred_masks,
-                         val_table, seed, batch_id=None, task="crop_type"):
+                         val_table, seed, batch_id=None, CFG=None, task="crop_type"):
     _id = 0
     # print(gt_masks.shape,pred_masks.shape)
     # pred_masks[pred_masks == 1] = 128
@@ -424,7 +424,8 @@ def main(CFG):
         mode="val",
         device=device,
         task=CFG.task,
-        log=True
+        log=True,
+        CFG=CFG,
     )
     print(f"val Result {CFG.task}")
     if CFG.task == "crop_type":
