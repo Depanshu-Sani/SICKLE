@@ -1,3 +1,9 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/sickle-a-multi-sensor-satellite-imagery/crop-yield-prediction-on-sickle)](https://paperswithcode.com/sota/crop-yield-prediction-on-sickle?p=sickle-a-multi-sensor-satellite-imagery)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/sickle-a-multi-sensor-satellite-imagery/sowing-date-prediction-on-sickle)](https://paperswithcode.com/sota/sowing-date-prediction-on-sickle?p=sickle-a-multi-sensor-satellite-imagery)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/sickle-a-multi-sensor-satellite-imagery/harvesting-date-prediction-on-sickle)](https://paperswithcode.com/sota/harvesting-date-prediction-on-sickle?p=sickle-a-multi-sensor-satellite-imagery)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/sickle-a-multi-sensor-satellite-imagery/transplanting-date-prediction-on-sickle)](https://paperswithcode.com/sota/transplanting-date-prediction-on-sickle?p=sickle-a-multi-sensor-satellite-imagery)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/sickle-a-multi-sensor-satellite-imagery/crop-type-mapping-on-sickle)](https://paperswithcode.com/sota/crop-type-mapping-on-sickle?p=sickle-a-multi-sensor-satellite-imagery)
+
 # SICKLE: A Multi-Sensor Satellite Imagery Dataset Annotated with Multiple Key Cropping Parameters (Oral Presentation, WACV 2024)
 This is the official implementation of **_[SICKLE: A Multi-Sensor Satellite Imagery Dataset Annotated with Multiple Key Cropping Parameters](https://sites.google.com/iiitd.ac.in/sickle/home)_**.
 
