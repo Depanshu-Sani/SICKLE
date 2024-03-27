@@ -547,6 +547,7 @@ def main(CFG):
         mode="val",
         device=device,
         task=CFG.task,
+        CFG=CFG
     )
 
     val_loss, val_metrics, wandb_table = iterate(log=True, **arg_dict)
@@ -576,7 +577,8 @@ def main(CFG):
         mode="test",
         device=device,
         task=CFG.task,
-        log=True
+        log=True,
+        CFG=CFG
     )
     print("Test Result")
     if CFG.task == "crop_type":
